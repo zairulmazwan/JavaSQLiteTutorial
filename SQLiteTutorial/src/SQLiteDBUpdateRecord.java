@@ -9,17 +9,18 @@ public class SQLiteDBUpdateRecord {
 	{
 		
 		SQLiteDBUpdateRecord update = new SQLiteDBUpdateRecord();
-		update.updateRecord("PA003", "Food", "Rice", 3);
+		update.updateRecord("PA003", "Food", "Vegetable", 3);
 		
 	}
 	
 	public void updateRecord (String pCode, String pCat, String pName, int Id) 
 	{
 		String sql = "UPDATE Products SET ProductCode = ?, ProductCategory = ?, ProductName = ? WHERE Id = ?";
+		Connection conn = connect();
 		
-		try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+		try 
+        {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the corresponding param
             pstmt.setString(1, pCode);
             pstmt.setString(2, pCat);
